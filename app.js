@@ -13,15 +13,17 @@ app.get("/",(req,res)=>{
 res.send("welcome")
 })
 
-app.post("/add",(req,res)=>{
+app.post("/add",async(req,res)=>{
     let data=new pModel(req.body)
     console.log(data)
+    await data.save()
     res.send(data)
     })
     
-    app.get("/view",(req,res)=>{
-        res.send("add data")
+    app.get("/view",async(req,res)=>{
+        let data= await pModel.find()
+        res.send(data)
         })
 
-app.listen(3001)
+app.listen(3000)
 
